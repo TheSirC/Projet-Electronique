@@ -1,0 +1,22 @@
+<resources>
+
+    <dimen name="text_view_title_margin_top">50dp</dimen>
+    <dimen name="text_view_title_text_size">70sp</dimen>
+    <dimen name="edit_text_ip_width">460dp</dimen>
+    <dimen name="edit_text_ip_height">83dp</dimen>
+    <dimen name="edit_text_ip_text_size">45sp</dimen>
+    <dimen name="edit_text_port_width">266dp</dimen>
+    <dimen name="edit_text_port_height">83dp</dimen>
+    <dimen name="edit_text_port_margin_top">40dp</dimen>
+    <dimen name="edit_text_port_text_size">45sp</dimen>
+    <dimen name="text_view_text_size">25sp</dimen>
+    <dimen name="button_connect_size">240dp</dimen>
+    <dimen name="button_connect_margin_top">60dp</dimen>
+
+    <dimen name="relative_layout_margin_top">20dp</dimen>
+    <dimen name="text_view_left_text_size">60sp</dimen>
+    <dimen name="text_view_right_text_size">60sp</dimen>
+    <dimen name="text_view_warning_text_size">80sp</dimen>
+    <dimen name="button_direction_size">180dp</dimen>
+    
+</resources>

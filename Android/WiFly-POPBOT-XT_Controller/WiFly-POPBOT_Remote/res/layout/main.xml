@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#db2122"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+	<requestFocus />
+	
+	<TextView
+	    android:id="@+id/textRight"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="@dimen/text_view_title_margin_top"
+	    android:text="WiFly Remote"
+	    android:textColor="#FFFFFF"
+	    android:textSize="@dimen/text_view_title_text_size"
+	    android:textStyle="bold" />
+	
+	<LinearLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:gravity="center"
+	    android:orientation="vertical" >
+	    
+	    <EditText
+	        android:id="@+id/etxtIP"
+	        android:layout_width="@dimen/edit_text_ip_width"
+	        android:layout_height="@dimen/edit_text_ip_height"
+	        android:background="@drawable/edit_text_ip_bg"
+	        android:gravity="center"
+	        android:text="192.168.1.1"
+	        android:textColor="#FFFFFF"
+	        android:textSize="@dimen/edit_text_ip_text_size" />
+	
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="IP ADDRESS"
+	        android:textColor="#FFFFFF"
+	        android:textSize="@dimen/text_view_text_size"
+	        android:textStyle="bold" />
+		
+	    <EditText
+	        android:id="@+id/etxtPort"
+	        android:layout_width="@dimen/edit_text_port_width"
+	        android:layout_height="@dimen/edit_text_port_height"
+	        android:layout_marginTop="@dimen/edit_text_port_margin_top"
+	        android:background="@drawable/edit_text_port_bg"
+	        android:gravity="center"
+	        android:text="2000"
+	        android:textColor="#FFFFFF"
+	        android:textSize="@dimen/edit_text_port_text_size" />
+	
+	    <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="PORT"
+	        android:textColor="#FFFFFF"
+	        android:textSize="@dimen/text_view_text_size"
+	        android:textStyle="bold" />
+	
+	    <Button
+	        android:id="@+id/buttonConnect"
+	        android:layout_width="@dimen/button_connect_size"
+	        android:layout_height="@dimen/button_connect_size"
+	        android:layout_marginTop="@dimen/button_connect_margin_top"
+	        android:background="@drawable/button_connect" />
+	</LinearLayout>
+</LinearLayout>
