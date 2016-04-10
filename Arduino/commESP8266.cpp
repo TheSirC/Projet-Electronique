@@ -48,7 +48,7 @@ void loop()
 
       //ConnectionId contient l'Id de la connexion
 
-      String webpage = "<.h1>Hello<.h1><.h2>World!</h2><button>LED1</button>";
+      String webpage = "<h1>Hello<h1><h2>World!</h2><button>LED1</button>";
 
       // On défini la taille de la commande qui va être envoyée
       String cipSend = "AT+CIPSEND=" cipSend += connectionId;
