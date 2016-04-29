@@ -74,7 +74,7 @@ void loop()
       //Fermeture de la connexion
       String closeCommand = "AT+CIPCLOSE=";
       closeCommand+=connectionId; // append connection id
-      closeCommand+="\r\n"
+      closeCommand+="\r\n";
 
       sendData(closeCommand,DEBUG);
     }
