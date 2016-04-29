@@ -11,14 +11,14 @@ void setup()
 {
   //Activation de la wifi sur l'ESP
   pinMode(WifiOn, OUTPUT); // Le PIN 14 permet de démarrer la wifi ou de la mettre en veille sur des applications de demandant pas un accès permanant
-  digitalWrite(WifiOn, HIGH) //Démarrage des communications séries
+  digitalWrite(WifiOn, HIGH); //Démarrage des communications séries
   Serial.begin(115200); // On démarre la communication avec le PC
   esp8266.begin(9600); // On démare la communication en l'Arduino et l'ESP
 
   delay(1000); // Temps d'attente pour que l'initialisation se déroule correctement
 
   //Initialisation du serveur ESP :
-  Serial.println( "**************************************************************")
+  Serial.println( "**************************************************************");
   Serial.println( "*************** Initialisation AT de l'ESP *******************");
   Serial.println( "**************************************************************");
 
