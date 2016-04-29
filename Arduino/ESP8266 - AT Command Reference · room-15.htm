@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us"><head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      ESP8266 - AT Command Reference · room-15
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="ESP8266%20-%20AT%20Command%20Reference%20%C2%B7%20room-15_fichiers/poole.css">
+  <link rel="stylesheet" href="ESP8266%20-%20AT%20Command%20Reference%20%C2%B7%20room-15_fichiers/syntax.css">
+  <link rel="stylesheet" href="ESP8266%20-%20AT%20Command%20Reference%20%C2%B7%20room-15_fichiers/hyde.css">
+  <link rel="stylesheet" href="ESP8266%20-%20AT%20Command%20Reference%20%C2%B7%20room-15_fichiers/css.css">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://room-15.github.io/blog/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="https://room-15.github.io/blog/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://room-15.github.io/atom.xml">
+<script src="ESP8266%20-%20AT%20Command%20Reference%20%C2%B7%20room-15_fichiers/embed.js" async="" type="text/javascript"></script><script charset="UTF-8" async="" src="ESP8266%20-%20AT%20Command%20Reference%20%C2%B7%20room-15_fichiers/alfie.js"></script></head>
+
+
+  <body>
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="https://room-15.github.io/blog">
+          room-15
+        </a>
+      </h1>
+      <p class="lead"></p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="https://room-15.github.io/blog">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="https://room-15.github.io/blog/about/">About</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+      
+      <a class="sidebar-nav-item" href="https://github.com/room-15/blog/archive/v1.0.0.zip">Download</a>
+      <a class="sidebar-nav-item" href="https://github.com/room-15/blog">GitHub project</a>
+      <span class="sidebar-nav-item">Currently v1.0.0</span>
+    </nav>
+
+    <p>© 2016. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">ESP8266 - AT Command Reference</h1>
+  <span class="post-date">26 Mar 2015 | by fuho</span>
+  <p>ESP8266, in it’s default configuration, boots up into the serial modem mode. In this mode you
+can communicate with it using a set of <strong>AT commands</strong>. I will present to you a reference
+of all known AT commands that ESP8266 supports, explain what they do and how to use them.</p>
+
+<p>Historically AT commands are based on the <a href="https://room-15.github.io/blog/2015/03/26/esp8266-at-command-reference/hayes">Hayes Command Set</a> and these are no different.</p>
+
+<h2 id="at-commands">AT Commands</h2>
+<p><a name="at-commands"></a></p>
+
+<h3 id="index-of-all-known-at-commands">Index of all known AT commands</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Basic</strong></th>
+      <th style="text-align: center"><strong>WiFI  layer</strong></th>
+      <th style="text-align: left"><strong>TCPIP  Layer</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="#AT">AT</a></td>
+      <td style="text-align: center"><a href="#AT+CWMODE">AT+CWMODE</a></td>
+      <td style="text-align: left"><a href="#AT+CIPSTATUS">AT+CIPSTATUS</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="#AT+RST">AT+RST</a></td>
+      <td style="text-align: center"><a href="#AT+CWJAP">AT+CWJAP</a></td>
+      <td style="text-align: left"><a href="#AT+CIPSTART">AT+CIPSTART</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="#AT+GMR">AT+GMR</a></td>
+      <td style="text-align: center"><a href="#AT+CWLAP">AT+CWLAP</a></td>
+      <td style="text-align: left"><a href="#AT+CIPSEND">AT+CIPSEND</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="#AT+GSLP">AT+GSLP</a></td>
+      <td style="text-align: center"><a href="#AT+CWQAP">AT+CWQAP</a></td>
+      <td style="text-align: left"><a href="#AT+CIPCLOSE">AT+CIPCLOSE</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="#ATE">ATE</a></td>
+      <td style="text-align: center"><a href="#AT+CWSAP">AT+CWSAP</a></td>
+      <td style="text-align: left"><a href="#AT+CIFSR">AT+CIFSR</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">&nbsp;</td>
+      <td style="text-align: center"><a href="#AT+CWLIF">AT+CWLIF</a></td>
+      <td style="text-align: left"><a href="#AT+CIPMUX">AT+CIPMUX</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">&nbsp;</td>
+      <td style="text-align: center"><a href="#AT+CWDHCP">AT+CWDHCP</a></td>
+      <td style="text-align: left"><a href="#AT+CIPSERVER">AT+CIPSERVER</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">&nbsp;</td>
+      <td style="text-align: center"><a href="#AT+CIPSTAMAC">AT+CIPSTAMAC</a></td>
+      <td style="text-align: left"><a href="#AT+CIPMODE">AT+CIPMODE</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">&nbsp;</td>
+      <td style="text-align: center"><a href="#AT+CIPAPMAC">AT+CIPAPMAC</a></td>
+      <td style="text-align: left"><a href="#AT+CIPSTO">AT+CIPSTO</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">&nbsp;</td>
+      <td style="text-align: center"><a href="#AT+CIPSTA">AT+CIPSTA</a></td>
+      <td style="text-align: left"><a href="#AT+CIUPDATE">AT+CIUPDATE</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">&nbsp;</td>
+      <td style="text-align: center"><a href="#AT+CIPAP">AT+CIPAP</a></td>
+      <td style="text-align: left"><a href="#+IPD">+IPD</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="line-termination">Line termination</h3>
+<p>ESP8266 expects <code>&lt;CR&gt;&lt;LF&gt;</code> or <em>CarriageReturn</em> and <em>LineFeed</em> at the end of each command,
+but just<code>&lt;CR</code>&gt; seems to work too.</p>
+
+<h3 id="command-variants">Command variants</h3>
+<p>Each command can have up to 4 variants changing the <em>function</em> of it. You can
+chose between them by appending one of four possible values to the end of the
+root command itself. These four appendices can have the following values
+<code>""</code>,<code>=&lt;parameter|[parameters]&gt;</code>,<code>"?"</code>,<code>=?</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Type</strong></th>
+      <th style="text-align: center"><strong>Example</strong></th>
+      <th style="text-align: left"><strong>Description</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Test</td>
+      <td style="text-align: center">AT+CIPSTART=?</td>
+      <td style="text-align: left">Query the range of values (So far only <a href="#AT+CWMODE">AT+CWMODE=?</a> uses it)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Query</td>
+      <td style="text-align: center">AT+CMD?</td>
+      <td style="text-align: left">Returns the current value of the parameter.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Set</td>
+      <td style="text-align: center">AT+CMD=Parameter</td>
+      <td style="text-align: left">Set the value of user-defined parameters in commands and run.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: center">AT+CMD</td>
+      <td style="text-align: left">Runs commands with no user-defined parameters.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="note">Note:</h5>
+<ul>
+  <li>Not all AT commands support all 4 variants.</li>
+  <li>[] = default value, not required or may not appear.</li>
+  <li>String values require double quotation marks, for example: <code>AT+CWSAP="ESP756190","21030826",1,4</code>.</li>
+  <li>Baud rate = 115200</li>
+  <li>AT instruction ends with “\r\n”</li>
+</ul>
+
+<h2 id="commands">Commands</h2>
+
+<h3 id="a-nameatat---test-at-startupa"><a name="AT"><code>AT</code> - Test AT startup</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT</td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Test if AT system works correctly</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatrstatrst---restart-modulea"><a name="AT+RST"><code>AT+RST</code> - Restart module</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+RST</td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Reset the module</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="esp-01-output-after-reset">ESP-01 Output after reset:</h4>
+
+<pre><code> ets Jan  8 2013,rst cause:4, boot mode:(3,7)
+
+wdt reset
+load 0x40100000, len 24444, room 16
+tail 12
+chksum 0xe0
+ho 0 tail 12 room 4
+load 0x3ffe8000, len 3168, room 12
+tail 4
+chksum 0x93
+load 0x3ffe8c60, len 4956, room 4
+tail 8
+chksum 0xbd
+csum 0xbd
+
+ready
+</code></pre>
+
+<h4 id="esp-12-output-after-reset">ESP-12 Output after reset:</h4>
+
+<pre><code>\0x04B1\0x85 \0xff\0x13:'\0xe0;\0xcc;!G\0xfa\0x11\0xa9R\0xc6\0x83\0x01\0xd9\0x81
+[Vendor:www.ai-thinker.com Version:0.9.2.4]
+
+ready
+</code></pre>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatgmratgmr---view-version-infoa"><a name="AT+GMR"><code>AT+GMR</code> - View version info</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+GMR</td>
+      <td style="text-align: left"><code>version</code>, OK</td>
+      <td style="text-align: left">Print firmware version</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters">Parameters:</h5>
+<ul>
+  <li><code>version</code>: firmware version number</li>
+</ul>
+
+<h5 id="esp-01-output">ESP-01 output:</h5>
+
+<pre><code>00160901
+</code></pre>
+
+<h5 id="esp-12-output">ESP-12 output:</h5>
+
+<pre><code>0018000902-AI03
+</code></pre>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatgslpatgslp---enter-deep-sleep-modea"><a name="AT+GSLP"><code>AT+GSLP</code> - Enter deep-sleep mode</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">set</td>
+      <td style="text-align: left">AT+GSLP=<code>time</code></td>
+      <td style="text-align: left"><code>time</code> OK</td>
+      <td style="text-align: left">Enter deep sleep mode for <code>time</code> milliseconds</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-1">parameters:</h5>
+<ul>
+  <li><code>time</code>: Time to sleep in milliseconds</li>
+</ul>
+
+<h5 id="example">Example：</h5>
+<p><code>AT+GSLP=1500</code></p>
+
+<h5 id="note-1">Note:</h5>
+<p>Hardware has to support deep-sleep wake up (Reset pin has to be High).</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameateate---enable--disable-echoa"><a name="ATE"><code>ATE</code> - Enable / Disable echo</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">ATE0</td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Disable echo (Doesn’t send back received command)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">ATE1</td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Enable echo (Sends back received command before response)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="note-2">Note:</h5>
+<p>I haven’t had any luck with this command yet. Both <code>ATE0</code> and <code>ATE1</code> return <code>no this fun</code>.<br>
+<code>ATE</code> returns <code>OK</code><br>
+This changed with <code>ESP-12</code> where the command functions exactly as expected!</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcwmodeatcwmode---wifi-modestation-ap-station--apa"><a name="AT+CWMODE"><code>AT+CWMODE</code> - WIFI mode（station, AP, station + AP）</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Test</td>
+      <td style="text-align: left">AT+CWMODE=?</td>
+      <td style="text-align: left">+CWMODE:(1-3)   OK</td>
+      <td style="text-align: left">List valid modes</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Query</td>
+      <td style="text-align: left">AT+CWMODE?</td>
+      <td style="text-align: left">+CWMODE:<code>mode</code>   OK</td>
+      <td style="text-align: left">Query AP’s info which is connect by ESP8266.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CWMODE=<code>mode</code></td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Set AP’s info which will be connect by ESP8266.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-2">Parameters:</h5>
+<ul>
+  <li><code>mode</code>： An integer designating the mode of operation either 1, 2, or 3.<br>
+  <strong>1</strong> =  Station mode (client)<br>
+  <strong>2</strong> =  AP mode (host)<br>
+  <strong>3</strong> =  AP + Station mode (Yes, ESP8266 has a dual mode!)</li>
+</ul>
+
+<h5 id="notes">Notes:</h5>
+<p>ESP-12 came configured as <strong>host</strong> with ssid set to <em>ESP_A0A3F2</em>, no password, channel <em>1</em>
+You can use <a href="#AT+CWSAP">AT+CWSAP?</a> to find the current settings.</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcwjapatcwjap---connect-to-apa"><a name="AT+CWJAP"><code>AT+CWJAP</code> - Connect to AP</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Query</td>
+      <td style="text-align: left">AT+CWJAP?</td>
+      <td style="text-align: left">+ CWJAP:<code>ssid</code> OK</td>
+      <td style="text-align: left">Prints the SSID of Access Point ESP8266 is connected to.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CWJAP=<code>ssid</code>,<code>pwd</code></td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Commands ESP8266 to connect a SSID with supplied password.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-3">Parameters:</h5>
+<ul>
+  <li><code>ssid</code>：String, AP’s SSID</li>
+  <li><code>pwd</code>：String, not longer than 64 characters</li>
+</ul>
+
+<h5 id="example-1">Example：</h5>
+
+<pre><code>AT+CWJAP="my-test-wifi","1234test"  
+</code></pre>
+
+<h5 id="example-atcwjap">Example <code>AT+CWJAP?</code>：</h5>
+
+<pre><code>+CWJAP:"my-test-wifi"  
+</code></pre>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcwlapatcwlap---lists-available-apsa"><a name="AT+CWLAP"><code>AT+CWLAP</code> - Lists available APs</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Set</td>
+      <td style="text-align: left">AT+CWLAP=<code>ssid</code>,<code>mac</code>,<code>ch</code></td>
+      <td style="text-align: left">+CWLAP:<code>ecn</code>,<code>ssid</code>,<code>rssi</code>,<code>mac</code> OK</td>
+      <td style="text-align: left">Search available APs with specific conditions.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CWLAP</td>
+      <td style="text-align: left">AT+CWLAP:<code>ecn</code>,<code>ssid</code>,<code>rssi</code>,<code>mac</code>  OK</td>
+      <td style="text-align: left">Lists available Access Points.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-4">Parameters:</h5>
+<ul>
+  <li><code>ecn</code>:
+    <ul>
+      <li><strong>0</strong> =  OPEN</li>
+      <li><strong>1</strong> =  WEP</li>
+      <li><strong>2</strong> =  WPA_PSK</li>
+      <li><strong>3</strong> =  WPA2_PSK</li>
+      <li><strong>4</strong> =  WPA_WPA2_PSK</li>
+    </ul>
+  </li>
+  <li><code>ssid</code>: String, SSID of AP</li>
+  <li><code>rssi</code>: signal strength</li>
+  <li><code>mac</code>: String, MAC address</li>
+</ul>
+
+<h5 id="note-3">Note:</h5>
+<p>On <strong>ESP-01</strong> I have had no luck with the set version of this command (<code>AT+CWLAP=...</code>). If you know what it does
+please let me know.<br>
+On <strong>ESP-12</strong>, the <em>Set</em> version of the command allows to see if a certain SSID, with certain MAC on
+certain channel exists. If it doesit is returned as one line of the <em>Execute</em> version of this command.</p>
+
+<h5 id="example-atcwlap">Example <code>AT+CWLAP</code>:</h5>
+
+<pre><code>+CWLAP:(3,"CVBJB",-71,"f8:e4:fb:5b:a9:5a",1)
++CWLAP:(3,"HT_00d02d638ac3",-90,"04:f0:21:0f:1f:61",1)
++CWLAP:(3,"CLDRM",-69,"22:c9:d0:1a:f6:54",1)
++CWLAP:(2,"AllSaints",-88,"c4:01:7c:3b:08:48",1)
++CWLAP:(0,"AllSaints-Guest",-83,"c4:01:7c:7b:08:48",1)
++CWLAP:(0,"AllSaints-Guest",-83,"c4:01:7c:7b:05:08",6)
++CWLAP:(4,"C7FU24",-27,"e8:94:f6:90:f9:d7",6)
++CWLAP:(2,"AllSaints",-82,"c4:01:7c:3b:05:08",6)
++CWLAP:(3,"QGJTL",-87,"f8:e4:fb:b5:6b:b4",6)
++CWLAP:(4,"50EFA8",-78,"74:44:01:50:ef:a7",6)
++CWLAP:(0,"optimumwifi",-78,"76:44:01:50:ef:a8",6)
++CWLAP:(3,"BHQH4",-95,"18:1b:eb:1a:af:5b",6)
++CWLAP:(3,"NETGEAR49",-86,"84:1b:5e:e0:28:03",7)
++CWLAP:(3,"ngHub_319332NW00047",-56,"20:e5:2a:79:b1:2f",11)
++CWLAP:(3,"BFZR4",-73,"18:1b:eb:1d:c3:91",11)
++CWLAP:(1,"5FFVL",-82,"00:26:b8:b5:c0:f2",11)
++CWLAP:(3,"59G6D",-77,"00:7f:28:6d:91:7b",11)
++CWLAP:(3,"N16FU",-53,"20:cf:30:ce:60:fe",11)
++CWLAP:(3,"ITS",-82,"90:72:40:21:5f:76",11)
++CWLAP:(3,"ITS",-79,"24:a2:e1:f0:04:e4",11)
+</code></pre>
+
+<h5 id="example-atcwlapn16fu20cf30ce60fe11">Example <code>AT+CWLAP="N16FU","20:cf:30:ce:60:fe",11</code>:</h5>
+
+<pre><code>+CWLAP:(3,"N16FU",-53,"20:cf:30:ce:60:fe",11)
+</code></pre>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcwqapatcwqap---disconnect-from-apa"><a name="AT+CWQAP"><code>AT+CWQAP</code> - Disconnect from AP</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CWQAP</td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Disconnect ESP8266 from the AP is currently connected to.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="note-4">Note:</h5>
+<p>After running this command, if you run <code>AT+CWJAP?</code> it still shows the AP you were connected to before.
+<a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcwsapatcwsap---configuration-of-softap-mode--a"><a name="AT+CWSAP"><code>AT+CWSAP</code> - Configuration of softAP mode  </a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Query</td>
+      <td style="text-align: left">AT+CWSAP?</td>
+      <td style="text-align: left">+CWSAP:<code>ssid</code>,<code>pwd</code>,<code>ch</code>,<code>ecn</code> OK</td>
+      <td style="text-align: left">Query configuration of ESP8266 softAP mode.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Set</td>
+      <td style="text-align: left">AT+CWSAP=<code>ssid</code>,<code>pwd</code>,<code>ch</code>,<code>ecn</code></td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Set configuration of softAP mode.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-5">Parameters:</h5>
+<ul>
+  <li><code>ssid</code>: String, ESP8266’s softAP SSID</li>
+  <li><code>pwd</code>: String, Password, no longer than 64 characters</li>
+  <li><code>ch</code>:  channel id</li>
+  <li><code>ecn</code>:
+    <ul>
+      <li><strong>0</strong> =  OPEN</li>
+      <li><strong>2</strong> =  WPA_PSK</li>
+      <li><strong>3</strong> =  WPA2_PSK</li>
+      <li><strong>4</strong> =  WPA_WPA2_PSK</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>Example</strong><br>
+<code>AT+CWSAP="esp_123","1234test",5,3</code><br>
+<code>AT+CWSAP?</code> =&gt; <code>+CWSAP:"esp_123","1234test",5,3</code></p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcwlifatcwlif---list-clients-connected-to-esp8266-softapa"><a name="AT+CWLIF"><code>AT+CWLIF</code> - List clients connected to ESP8266 softAP</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CWLIF</td>
+      <td style="text-align: left">[<code>ip</code>,<code>other</code>] OK</td>
+      <td style="text-align: left">List information on of connected clients.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-6">Parameters:</h5>
+<p><code>ip</code>:  IP address of a client connected to the ESP8266 softAP
+<code>other</code>:  Other info, look at example. I don’t know what it means yet.</p>
+
+<h5 id="example-esp-01">Example (ESP-01):</h5>
+
+<pre><code>AT+CWLIF
+
+192.168.4.100,3fff50b4:3fff50ba:3fff50c0:3fff50c6:3fff50cc:3fff50d2
+
+OK
+</code></pre>
+
+<h5 id="example-esp-12">Example (ESP-12):</h5>
+
+<pre><code>AT+CWLIF
+
+192.168.4.100,c0:ee:fb:25:33:ec
+
+OK
+</code></pre>
+
+<p>I ran the command after connecting to the ESP8266 with my cellphone.</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcwdhcpatcwdhcp---enabledisable-dhcpa"><a name="AT+CWDHCP"><code>AT+CWDHCP</code> - Enable/Disable DHCP</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Set</td>
+      <td style="text-align: left">AT+CWDHCP=<code>mode</code>,<code>en</code></td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Enable or disable DHCP for selected mode</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-7">Parameters:</h5>
+<ul>
+  <li><code>mode</code>:
+    <ul>
+      <li><strong>0</strong> : set ESP8266 as a softAP</li>
+      <li><strong>1</strong> : set ESP8266 as a station</li>
+      <li><strong>2</strong> : set both ESP8266 to both softAP and a station</li>
+    </ul>
+  </li>
+  <li><code>en</code>:
+    <ul>
+      <li><strong>0</strong> : Enable DHCP</li>
+      <li><strong>1</strong> : Disable DHCP</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="note-5">Note:</h5>
+<p>This command doesn’t seem to work on firmware <em>00160901</em> (ESP-01) nor
+<em>0018000902-AI03</em> (ESP-12).</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcipstamacatcipstamac---set-mac-address-of-esp8266-stationa"><a name="AT+CIPSTAMAC"><code>AT+CIPSTAMAC</code> - Set MAC address of ESP8266 station</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Query</td>
+      <td style="text-align: left">AT+CIPSTAMAC?</td>
+      <td style="text-align: left">+CIPSTAMAC:<code>mac</code>   OK</td>
+      <td style="text-align: left">Print current MAC ESP8266’s address.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CIPSTAMAC=<code>mac</code></td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Set ESP8266’s MAC address.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-8">Parameters:</h5>
+<ul>
+  <li><code>mac</code>： String, MAC address of the ESP8266 station.</li>
+</ul>
+
+<h5 id="example-2">Example:</h5>
+<p><code>AT+CIPSTAMAC="18:aa:35:97:d4:7b"</code></p>
+
+<h5 id="note-6">Note:</h5>
+<p>This command doesn’t seem to work on firmware 00160901</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcipapmacatcipapmac---set-mac-address-of-esp8266-softapa"><a name="AT+CIPAPMAC"><code>AT+CIPAPMAC</code> - Set MAC address of ESP8266 softAP</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Query</td>
+      <td style="text-align: left">AT+CIPAPMAC?</td>
+      <td style="text-align: left">+CIPAPMAC:<code>mac</code>   OK</td>
+      <td style="text-align: left">Get MAC address of ESP8266 softAP.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CIPAPMAC=<code>mac</code></td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Set mac of ESP8266 softAP.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-9">Parameters:</h5>
+<ul>
+  <li><code>mac</code>： String, MAC address of the ESP8266 softAP.</li>
+</ul>
+
+<h5 id="example-3">Example:</h5>
+<p>AT+CIPAPMAC=”2c:aa:35:97:d4:7b”</p>
+
+<h5 id="note-7">Note:</h5>
+<p>This command doesn’t seem to work on firmware 00160901</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcipstaatcipsta---set-ip-address-of-esp8266-stationa"><a name="AT+CIPSTA"><code>AT+CIPSTA</code> - Set IP address of ESP8266 station</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Query</td>
+      <td style="text-align: left">AT+CIPSTA?</td>
+      <td style="text-align: left">+CIPSTA:<code>ip</code>   OK</td>
+      <td style="text-align: left">Get IP address of ESP8266 station.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CIPSTA=<code>ip</code></td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Set ip addr of ESP8266 station.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-10">Parameters:</h5>
+<ul>
+  <li><code>ip</code>： String, ip address of the ESP8266 station.</li>
+</ul>
+
+<h5 id="example-4">Example:</h5>
+<p>AT+CIPSTA=”192.168.101.108”</p>
+
+<h5 id="note-8">Note:</h5>
+<p>This command doesn’t seem to work on firmware 00160901</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcipapatcipap---set-ip-address-of-esp8266-softapa"><a name="AT+CIPAP"><code>AT+CIPAP</code> - Set ip address of ESP8266 softAP</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Query</td>
+      <td style="text-align: left">AT+CIPAP?</td>
+      <td style="text-align: left">+CIPAP:<code>ip</code>   OK</td>
+      <td style="text-align: left">Get ip address of ESP8266 softAP.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CIPAP=<code>ip</code></td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Set ip addr of ESP8266 softAP.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-11">Parameters:</h5>
+<ul>
+  <li><code>ip</code>： String, ip address of ESP8266 softAP.</li>
+</ul>
+
+<h5 id="example-5">Example:</h5>
+
+<pre><code>AT+CIPAP="192.168.5.1"
+</code></pre>
+
+<h5 id="note-9">Note:</h5>
+<p>This command doesn’t seem to work on firmware 00160901</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcipstatusatcipstatus---information-about-connectiona"><a name="AT+CIPSTATUS"><code>AT+CIPSTATUS</code> - Information about connection</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Test</td>
+      <td style="text-align: left">AT+CIPSTATUS=?</td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">&nbsp;</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CIPSTATUS</td>
+      <td style="text-align: left">STATUS:<code>status</code> +CIPSTATUS:<code>id</code>,<code>type</code>,<code>addr</code>,<code>port</code>,<code>tetype</code> OK</td>
+      <td style="text-align: left">Get information about connection.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-12">Parameters:</h5>
+<ul>
+  <li><code>status</code>：
+    <ul>
+      <li><strong>2</strong>: Got IP</li>
+      <li><strong>3</strong>: Connected</li>
+      <li><strong>4</strong>: Disconnected</li>
+    </ul>
+  </li>
+  <li><code>id</code>： id of the connection (0~4), for multi-connect</li>
+  <li><code>type</code>： String, “TCP” or “UDP”</li>
+  <li><code>addr</code>： String, IP address.</li>
+  <li><code>port</code>： port number</li>
+  <li><code>tetype</code>：
+    <ul>
+      <li><strong>0</strong> = ESP8266 runs as a client</li>
+      <li><strong>1</strong> = ESP8266 runs as a server</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="note-10">Note:</h5>
+<p>On <strong>ESP-01</strong> this command returns <code>STATUS:1</code> instead (no extra info, but status changes)
+On <strong>0018000902-AI03</strong> this command returns <code>STATUS:2</code> instead (no extra info, but status changes)</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcipstartatcipstart---establish-tcp-connection-or-register-udp-port-and-start-a-connection--a"><a name="AT+CIPSTART"><code>AT+CIPSTART</code> - Establish TCP connection or register UDP port and start a connection  </a></h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td><strong>Variant</strong></td>
+      <td><strong>Command</strong></td>
+      <td><strong>Response</strong></td>
+      <td><strong>Function</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Set</td>
+      <td>AT+CIPSTART=<code>type</code>,<code>addr</code>,<code>port</code></td>
+      <td>OK</td>
+      <td>Start a connection as client. (Single connection mode)</td>
+    </tr>
+    <tr>
+      <td>Set</td>
+      <td>AT+CIPSTART=<code>id</code>,<code>type</code>,<code>addr</code>,<code>port</code></td>
+      <td>OK</td>
+      <td>Start a connection as client. (Multiple connection mode)</td>
+    </tr>
+    <tr>
+      <td>Test</td>
+      <td>AT+CIPSTART=?</td>
+      <td>[+CIPSTART:(id)(“type”),(“ip address”),(port)] OK</td>
+      <td>List possible command variations)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-13">Parameters:</h5>
+<ul>
+  <li><code>id</code>: 0-4, id of connection</li>
+  <li><code>type</code>: String, “TCP” or “UDP”</li>
+  <li><code>addr</code>: String, remote IP</li>
+  <li><code>port</code>: String, remote port</li>
+</ul>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcipsendatcipsend---send-dataa"><a name="AT+CIPSEND"><code>AT+CIPSEND</code> - Send data</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Test</td>
+      <td style="text-align: left">AT+CIPSEND=?</td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">&nbsp;</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Set</td>
+      <td style="text-align: left">AT+CIPSEND=<code>length</code></td>
+      <td style="text-align: left">SEND OK</td>
+      <td style="text-align: left">Set length of the data that will be sent. For normal send (single connection).</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Set</td>
+      <td style="text-align: left">AT+CIPSEND=<code>id</code>,<code>length</code></td>
+      <td style="text-align: left">SEND OK</td>
+      <td style="text-align: left">Set length of the data that will be sent. For normal send (multiple connection).</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CIPSEND</td>
+      <td style="text-align: left">&nbsp;</td>
+      <td style="text-align: left">Send data. For unvarnished transmission mode.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="normal-mode">Normal Mode</h4>
+
+<h5 id="parameters-14">Parameters:</h5>
+<ul>
+  <li><code>id</code>: ID no. of transmit connection</li>
+  <li><code>length</code>: data length, MAX 2048 bytes</li>
+</ul>
+
+<h4 id="unvarnished-transmission-mode">Unvarnished Transmission Mode</h4>
+<p>Wrap return “<strong>&gt;</strong>” after execute command. Enters unvarnished transmission, 20ms interval between
+each packet, maximum 2048 bytes per packet. When single packet containing “+++” is received, it
+returns to command mode.</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcipcloseatcipclose---close-tcp-or-udp-connectiona"><a name="AT+CIPCLOSE"><code>AT+CIPCLOSE</code> - Close TCP or UDP connection</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Test</td>
+      <td style="text-align: left">AT+CIPCLOSE=?</td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">&nbsp;</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Set</td>
+      <td style="text-align: left">AT+CIPCLOSE=<code>id</code></td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Close TCP or UDP connection.For multiply connection mode</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CIPCLOSE</td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Close TCP or UDP connection.For single connection mode</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-15">Parameters:</h5>
+<ul>
+  <li><code>id</code>： ID no. of connection to close, when id=5, all connections will be closed.</li>
+</ul>
+
+<h5 id="note-11">Note:</h5>
+<p>In server mode, id = 5 has no effect!</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcifsratcifsr---get-local-ip-addressa"><a name="AT+CIFSR"><code>AT+CIFSR</code> - Get local IP address</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Test</td>
+      <td style="text-align: left">AT+CIFSR=?</td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">&nbsp;</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CIFSR</td>
+      <td style="text-align: left">+CIFSR:<code>ip</code> OK</td>
+      <td style="text-align: left">Get local IP address.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-16">Parameters:</h5>
+<ul>
+  <li><code>ip</code>: IP address of the ESP8266 as an client.</li>
+</ul>
+
+<h5 id="example-atcifsr">Example <code>AT+CIFSR</code>:</h5>
+
+<pre><code>10.101.10.134
+</code></pre>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcipmuxatcipmux---enable-multiple-connections-or-nota"><a name="AT+CIPMUX"><code>AT+CIPMUX</code> - Enable multiple connections or not</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Set</td>
+      <td style="text-align: left">AT+CIPMUX=<code>mode</code></td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Enable / disable multiplex mode (up to 4 conenctions)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Query</td>
+      <td style="text-align: left">AT+CIPMUX?</td>
+      <td style="text-align: left">+CIPMUX:<code>mode</code> OK</td>
+      <td style="text-align: left">Print current multiplex mode.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-17">Parameters:</h5>
+<ul>
+  <li><code>mode</code>:
+    <ul>
+      <li><strong>0</strong>:  Single connection</li>
+      <li><strong>1</strong>:  Multiple connections (MAX 4)</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="note-12">NOTE:</h5>
+<p>This mode can only be changed after all connections are disconnected. If server is started, reboot is required.</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcipserveratcipserver---configure-as-servera"><a name="AT+CIPSERVER"><code>AT+CIPSERVER</code> - Configure as server</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Set</td>
+      <td style="text-align: left">AT+CIPSERVER=<code>mode</code>[,<code>port</code>]</td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Configure ESP8266 as server</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-18">Parameters:</h5>
+<ul>
+  <li><code>mode</code>:</li>
+  <li>0:  Delete server (need to follow by restart)</li>
+  <li>1:	Create server</li>
+  <li><code>port</code>: port number, default is 333</li>
+</ul>
+
+<h5 id="note-13">NOTE:</h5>
+<ol>
+  <li>Server can only be created when AT+CIPMUX=1</li>
+  <li>Server monitor will automatically be created when Server is created.</li>
+  <li>When a client is connected to the server, it will take up one connection，be gave an id.</li>
+</ol>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcipmodeatcipmode---set-transfer-modea"><a name="AT+CIPMODE"><code>AT+CIPMODE</code> - Set transfer mode</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Query</td>
+      <td style="text-align: left">AT+CIPMODE?</td>
+      <td style="text-align: left">+CIPMODE:<code>mode</code> OK</td>
+      <td style="text-align: left">Set transfer mode,normal or transparent transmission.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Set</td>
+      <td style="text-align: left">AT+CIPMODE=<code>mode</code></td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Set transfer mode,normal or transparent transmission.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-19">Parameters:</h5>
+<ul>
+  <li><code>mode</code>:</li>
+  <li>0: normal mode</li>
+  <li>1:  unvarnished transmission mode</li>
+</ul>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatcipstoatcipsto---set-server-timeouta"><a name="AT+CIPSTO"><code>AT+CIPSTO</code> - Set server timeout</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Query</td>
+      <td style="text-align: left">AT+CIPSTO?</td>
+      <td style="text-align: left">+CIPSTO:<code>time</code></td>
+      <td style="text-align: left">Query server timeout.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Set</td>
+      <td style="text-align: left">AT+CIPSTO=<code>time</code></td>
+      <td style="text-align: left">OK</td>
+      <td style="text-align: left">Set server timeout.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-20">Parameters:</h5>
+<ul>
+  <li><code>time</code>: server timeout, range 0~7200 seconds</li>
+</ul>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameatciupdateatciupdate---update-through-networka"><a name="AT+CIUPDATE"><code>AT+CIUPDATE</code> - update through network</a></h3>
+
+<h3 id="dont-run-this-unless-you-know-what-youre-doing-">!!! Don’t run this unless you know what you’re doing !!!</h3>
+<p>### !!! It will likely brick your device !!!
+Attempts to self-update from the internet.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">AT+CIUPDATE</td>
+      <td style="text-align: left">+CIPUPDATE:<code>n</code> OK</td>
+      <td style="text-align: left">Start update through network</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-21">Parameters:</h5>
+<p>-<code>n</code>:<br>
+  - 1:  found server<br>
+  - 2:  connect server<br>
+  - 3:  got edition<br>
+  - 4:  start update</p>
+
+<h5 id="example-6">Example:</h5>
+
+<pre><code>AT+CIUPDATE
+
++CIUPDATE: 1
++CIUPDATE: 2
++CIUPDATE: 3
++CIUPDATE: 4
+
+\0x02\0x8cl\0x8el\0x8e\0x1cp\0x0c\0x8c\0xf2nn\0xee\0x00l\0x8c\0x8el`
+\0x02\0x90\0x12\0x12nnl\0x8cl`\0x02\0x0e\0x02nr\0x8e\0x92\0x92n\0x0c\0x0c
+\0x02\0x8c\0x92`\0x02`
+\0xf2n\0x0c\0x0c\0x0c\0x9e\0xe0b\0x82nl\0x8c\0x0c\0x8c
+\0xf2nn\0xee\0x00\0x0c\0x8e\0x0elp\0xf2n\0xe0\0x10\0x02\0x0c
+\0x0cr\0x8c\0x9c\0x9c\0xe2\0xe0\0x0c\0x0c\0x0c
+\0x0cb\0x0cn\0xe2|\0x02\0xec\0xecl\0x8c\0x0cb\0x8c\0xf2nn
+...forever
+</code></pre>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h3 id="a-nameipdipd---receive-network-dataa"><a name="+IPD"><code>+IPD</code> - Receive network data</a></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Variant</strong></th>
+      <th style="text-align: left"><strong>Command</strong></th>
+      <th style="text-align: left"><strong>Response</strong></th>
+      <th style="text-align: left"><strong>Function</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">&nbsp;</td>
+      <td style="text-align: left">+IPD,<code>len</code>:<code>data</code></td>
+      <td style="text-align: left">Receive network data from single connection.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Execute</td>
+      <td style="text-align: left">&nbsp;</td>
+      <td style="text-align: left">+IPD,<code>id</code>,<code>len</code>:<code>data</code></td>
+      <td style="text-align: left">Receive network data from multiple connection.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="parameters-22">Parameters:</h5>
+<ul>
+  <li><code>id</code>:   id no. of connection</li>
+  <li><code>len</code>:  data length</li>
+  <li><code>data</code>:  data received</li>
+</ul>
+
+<h5 id="note-14">Note:</h5>
+<p>I have had no luck with this command so far.</p>
+
+<p><a href="#at-commands">Back to Index</a></p>
+
+<h2 id="sources">Sources</h2>
+<p><a href="https://github.com/espressif/esp8266_at/wiki">esp8266 GitHub Wiki</a></p>
+
+<h2 id="links">Links</h2>
+
+</div>
+
+<div id="disqus_thread"><iframe verticalscrolling="no" horizontalscrolling="no" src="ESP8266%20-%20AT%20Command%20Reference%20%C2%B7%20room-15_fichiers/a.htm" style="width: 1px ! important; min-width: 100% ! important; border: medium none ! important; overflow: hidden ! important; height: 4907px ! important;" title="Disqus" tabindex="0" scrolling="no" allowtransparency="true" name="dsq-app2" id="dsq-app2" frameborder="0" width="100%"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'room15';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="https://room-15.github.io/blog/2016/01/27/Library-versioning-done-right/">
+            Library versioning done right
+            <small>27 Jan 2016 | by Martin Breuer</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="https://room-15.github.io/blog/2016/01/21/Static-code-quality-measurements-with-SonarQube-Jacoco-and-UnitTests/">
+            Static code quality measurements with SonarQube, JaCoCo and UnitTests
+            <small>21 Jan 2016 | by Martin Breuer</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="https://room-15.github.io/blog/2015/12/21/Manipulating-the-status-and-navigation-bars/">
+            Manipulating the Status and Navigation Bars
+            <small>21 Dec 2015 | by Adam McNeilly</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  
+
+</body></html>
