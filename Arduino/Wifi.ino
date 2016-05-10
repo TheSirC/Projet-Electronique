@@ -4,7 +4,14 @@
 
 #define DEBUG true
 #define esp8266 Serial1
-#define WifiOn 14
+#define WifiOn 4
+#define LedPin 13
+
+
+float consigneVitesseM1 = 0;  // vitesse demand?e
+float consigneVitesseM2 = 0;
+// liste des param?tres globaux
+float paramVitesse = 1000;   //  
 
 
 //String NomduReseauWifi = "HugoSpot"
@@ -14,6 +21,7 @@ void setup()
 {
   //Activation de la wifi sur l'ESP
   pinMode(WifiOn, OUTPUT); // Le PIN 14 permet de démarrer la wifi ou de la mettre en veille sur des applications de demandant pas un accès permanant
+  pinMode(LedPin, OUTPUT);
   digitalWrite(WifiOn, HIGH);
   
   //Démarrage des communications séries:
@@ -21,7 +29,7 @@ void setup()
   esp8266.begin(9600); // On démare la communication en l'Arduino et l'ESP
 
   
-  delay(1000); // Temps d'attente pour que l'initialisation se déroule correctement
+  delay(2000); // Temps d'attente pour que l'initialisation se déroule correctement
 
   //Initialisation du serveur ESP :
   Serial.println( "**************************************************************");
@@ -90,28 +98,40 @@ void loop()
 
       if(cmd == ",5:B80;;")
       {
-        Serial.println("#####BAS !!####"); 
+        //Serial.println("#####BAS !!####"); 
+        //BlindLed(100);
+        
+        digitalWrite(ledPin, HIGH);
       }
 
 
       
       if(cmd == ",5:R80;;")
       {
-        Serial.println("####DROITE !!####"); 
+        //Serial.println("####DROITE !!####"); 
+        //BlindLed(200);
+        
+        digitalWrite(ledPin, HIGH);
       }
 
 
       
       if(cmd == ",5:L80;;")
       {
-        Serial.println("####GAUCHE !!####"); 
+        //Serial.println("####GAUCHE !!####"); 
+        //BlindLed(300);
+        
+        digitalWrite(ledPin, HIGH);
       }
 
 
       
       if(cmd == ",5:F80;;")
       {
-        Serial.println("####HAUT !!####"); 
+        //Serial.println("####HAUT !!####"); 
+        //BlindLed(400);
+        
+        digitalWrite(ledPin, HIGH);
       }
 
 
@@ -160,3 +180,15 @@ String sendDataRetour(String command, bool debug)
   String r = esp8266.readString();
   return(r);
 }
+
+void BlindLed(int time)
+{
+
+  for(int n = 0; n < 5 ; n++)
+   { digitalWrite(LedPin, HIGH);
+    delay(time);
+    digitalWrite(LedPin, LOW);
+    delay(time);
+  }
+}
+
