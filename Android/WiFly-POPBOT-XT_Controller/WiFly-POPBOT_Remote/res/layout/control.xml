@@ -45,7 +45,7 @@
 		    android:textColor="#FFFFFF"
 		    android:textSize="@dimen/text_view_right_text_size"
 		    android:textStyle="bold" />
-		
+
 	</RelativeLayout>
 
 	<LinearLayout
@@ -70,10 +70,11 @@
 	            android:layout_height="@dimen/button_direction_size"
 	            android:background="@drawable/button_left" />
 
-	        <Button
-	            android:layout_width="@dimen/button_direction_size"
-	            android:layout_height="@dimen/button_direction_size"
-	            android:visibility="invisible" />
+              <Button
+    	            android:id="@+id/buttonStop"
+    	            android:layout_width="@dimen/button_direction_size"
+    	            android:layout_height="@dimen/button_direction_size"
+    	            android:text="@string/buttonStop" />
 
 	        <Button
 	            android:id="@+id/buttonRight"
