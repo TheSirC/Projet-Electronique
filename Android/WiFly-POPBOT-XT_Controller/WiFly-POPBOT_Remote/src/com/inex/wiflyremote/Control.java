@@ -24,29 +24,29 @@ import android.widget.Toast;
 
 public class Control extends Activity{
     public static final int MESSAGE_DATA_RECEIVE = 0;
-    
+
     TextView textLeft, textRight, textWarning;
     Button buttonUp, buttonDown, buttonLeft, buttonRight;
 
 	Boolean task_state = true;
 	Vibrator vibrator;
-	
+
 	Socket s;
 	String ip;
 	int port;
-    
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.control);
 		ip = getIntent().getExtras().getString("IP");
 		port = Integer.parseInt(getIntent().getExtras().getString("PORT"));
-		
+
 		vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
 		textLeft = (TextView)findViewById(R.id.textLeft);
 		textRight = (TextView)findViewById(R.id.textRight);
-		
+
 		textWarning = (TextView)findViewById(R.id.textWarning);
 		textWarning.setVisibility(View.INVISIBLE);
 
@@ -61,7 +61,7 @@ public class Control extends Activity{
 					buttonUp.setPressed(false);
 					sendData("S0;;");
 				}
-				
+
 				return true;
 			}
 		});
@@ -77,7 +77,7 @@ public class Control extends Activity{
 					buttonDown.setPressed(false);
 					sendData("S0;;");
 				}
-				
+
 				return true;
 			}
 		});
@@ -93,7 +93,7 @@ public class Control extends Activity{
 					buttonLeft.setPressed(false);
 					sendData("S0;;");
 				}
-				
+
 				return true;
 			}
 		});
@@ -109,11 +109,27 @@ public class Control extends Activity{
 					buttonRight.setPressed(false);
 					sendData("S0;;");
 				}
-				
+
 				return true;
 			}
 		});
-		
+
+    buttonStop = (Button)findViewById(R.id.buttonStop);
+    buttonStop.setEnabled(false);
+    buttonStop.setOnTouchListener(new OnTouchListener() {
+      public boolean onTouch(View arg0, MotionEvent arg1) {
+        if(arg1.getAction() == MotionEvent.ACTION_DOWN) {
+          buttonStop.setPressed(true);
+          sendData("S80;;");
+        } else if(arg1.getAction() == MotionEvent.ACTION_UP) {
+          buttonStop.setPressed(false);
+          sendData("S0;;");
+        }
+
+        return true;
+      }
+    });
+
 		Runnable readThread = new Runnable() {
 			public void buttonEnable() {
 				runOnUiThread(new Runnable() {
@@ -122,25 +138,26 @@ public class Control extends Activity{
 						buttonDown.setEnabled(true);
 						buttonLeft.setEnabled(true);
 						buttonRight.setEnabled(true);
+            buttonStop.setEnabled(true);
 					}
 				});
 			}
-			
+
 			public void run() {
 				try {
 					s = new Socket();
 					s.connect((new InetSocketAddress(InetAddress.getByName(ip), port)), 2000);
 					buttonEnable();
-					
+
 					while(task_state) {
 						try {
 							BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
 							String strRead = in.readLine();
-							
+
 							if(strRead.endsWith(";")) {
 								strRead = strRead.substring(0, strRead.length() - 1);
 							}
-							
+
 							String[] strData = strRead.split(":");
 							for(int i = 0; i < strData.length; i++) {
 								try {
@@ -200,15 +217,15 @@ public class Control extends Activity{
 			}
 		};
 		new Thread(readThread).start();
-		
-		
+
+
 		Log.i("Check IP", ip + ":" + port);
 	}
-	
+
 	public void onPause() {
 		super.onPause();
 		task_state = false;
-		
+
 		try {
 			s.close();
 		} catch (IOException e) {
@@ -216,10 +233,10 @@ public class Control extends Activity{
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
-		
+
 		finish();
 	}
-	
+
 	public void sendData(String str) {
 		try {
 			OutputStream out = s.getOutputStream();
