@@ -45,7 +45,7 @@
 		    android:textColor="#FFFFFF"
 		    android:textSize="@dimen/text_view_right_text_size"
 		    android:textStyle="bold" />
-		
+
 	</RelativeLayout>
 
 	<LinearLayout
@@ -73,7 +73,7 @@
 	        <Button
 	            android:layout_width="@dimen/button_direction_size"
 	            android:layout_height="@dimen/button_direction_size"
-	            android:visibility="invisible" />
+	            android:background="@drawable/button_right" />
 
 	        <Button
 	            android:id="@+id/buttonRight"
